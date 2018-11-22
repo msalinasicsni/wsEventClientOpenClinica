@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://openclinica.org/ws/event/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://openclinica.org/ws/event/v1" xmlns:sch1="http://openclinica.org/ws/event/v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sch0="http://openclinica.org/ws/beans">
+  <wsdl:types>
+    <schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://openclinica.org/ws/beans" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://openclinica.org/ws/beans">
+      <complexType name="eventType">
+        <sequence>
+          <element name="studySubjectRef" type="beans:studySubjectRefType"/>
+          <element name="studyRef" type="beans:studyRefType"/>
+          <element name="eventDefinitionOID" type="beans:customStringType"/>
+          <element name="location" type="beans:customStringType"/>
+          <element name="startDate" type="date"/>
+          <element minOccurs="0" name="startTime" type="time"/>
+          <element minOccurs="0" name="endDate" type="date"/>
+          <element minOccurs="0" name="endTime" type="time"/>
+        </sequence>
+      </complexType>
+      <complexType name="eventsType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="event" type="beans:eventType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studySubjectType">
+        <sequence>
+          <element minOccurs="0" name="label" type="beans:customStringType"/>
+          <element minOccurs="0" name="secondaryLabel" type="beans:customStringType"/>
+          <element name="enrollmentDate" type="date"/>
+          <element name="subject" type="beans:subjectType"/>
+          <element name="studyRef" type="beans:studyRefType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studySubjectWithEventsType">
+        <sequence>
+          <element minOccurs="0" name="label" type="beans:customStringType"/>
+          <element minOccurs="0" name="secondaryLabel" type="beans:customStringType"/>
+          <element name="enrollmentDate" type="date"/>
+          <element name="subject" type="beans:subjectType"/>
+          <element name="studyRef" type="beans:studyRefType"/>
+          <element name="events" type="beans:eventsType"/>
+        </sequence>
+      </complexType>
+      <complexType name="subjectType">
+        <sequence>
+          <element minOccurs="0" name="uniqueIdentifier" type="beans:customStringType"/>
+          <element minOccurs="0" name="gender" type="beans:genderType"/>
+          <choice minOccurs="0">
+            <element name="dateOfBirth" type="date"/>
+            <element name="yearOfBirth" type="beans:customDateType"/>
+          </choice>
+        </sequence>
+      </complexType>
+      <complexType name="studiesType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="study" type="beans:studyType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studyType">
+        <sequence>
+          <element name="identifier" type="beans:customStringType"/>
+          <element name="oid" type="beans:customStringType"/>
+          <element name="name" type="beans:customStringType"/>
+          <element name="sites" type="beans:sitesType"/>
+        </sequence>
+      </complexType>
+      <complexType name="sitesType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="site" type="beans:siteType"/>
+        </sequence>
+      </complexType>
+      <complexType name="siteType">
+        <sequence>
+          <element name="identifier" type="beans:customStringType"/>
+          <element name="oid" type="beans:customStringType"/>
+          <element name="name" type="beans:customStringType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studySubjectsType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="studySubject" type="beans:studySubjectWithEventsType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studyEventDefinitionsType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="studyEventDefinition" type="beans:studyEventDefinitionType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studyEventDefinitionType">
+        <sequence>
+          <element name="oid" type="beans:customStringType"/>
+          <element name="name" type="beans:customStringType"/>
+          <element name="eventDefinitionCrfs" type="beans:crfsType"/>
+        </sequence>
+      </complexType>
+      <complexType name="eventDefinitionCrfsType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="eventDefinitionCrf" type="beans:eventDefinitionCrfType"/>
+        </sequence>
+      </complexType>
+      <complexType name="eventDefinitionCrfType">
+        <sequence>
+          <element name="required" type="boolean"/>
+          <element name="doubleDataEntry" type="boolean"/>
+          <element name="passwordRequired" type="boolean"/>
+          <element name="hideCrf" type="boolean"/>
+          <element name="sourceDataVerificaiton" type="beans:customStringType"/>
+          <element name="crf" type="beans:crfObjType"/>
+          <element name="defaultCrfVersion" type="beans:crfVersionType"/>
+        </sequence>
+      </complexType>
+      <complexType name="crfsType">
+        <sequence>
+          <element minOccurs="0" name="crf" type="beans:crfObjType"/>
+        </sequence>
+      </complexType>
+      <complexType name="crfObjType">
+        <sequence>
+          <element name="oid" type="beans:customStringType"/>
+          <element name="name" type="beans:customStringType"/>
+        </sequence>
+      </complexType>
+      <complexType name="crfVersionType">
+        <sequence>
+          <element name="oid" type="beans:customStringType"/>
+          <element name="name" type="beans:customStringType"/>
+        </sequence>
+      </complexType>
+      <complexType name="listStudySubjectsInStudyType">
+        <sequence>
+          <element name="studyRef" type="beans:studyRefType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studyEventDefinitionListAllType">
+        <sequence>
+          <element name="studyRef" type="beans:studyRefType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studyMetadataType">
+        <sequence>
+          <element name="studyRef" type="beans:studyRefType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studyRefType">
+        <sequence>
+          <element name="identifier" type="beans:customStringType"/>
+          <element minOccurs="0" name="siteRef" type="beans:siteRefType"/>
+        </sequence>
+      </complexType>
+      <complexType name="siteRefType">
+        <sequence>
+          <element name="identifier" type="beans:customStringType"/>
+        </sequence>
+      </complexType>
+      <complexType name="studySubjectRefType">
+        <sequence>
+          <element name="label" type="beans:customStringType"/>
+        </sequence>
+      </complexType>
+      <simpleType name="genderType">
+        <restriction base="string">
+          <enumeration value="m"/>
+          <enumeration value="f"/>
+        </restriction>
+      </simpleType>
+      <simpleType name="customStringType">
+        <restriction base="normalizedString">
+          <minLength value="1"/>
+          <whiteSpace value="collapse"/>
+        </restriction>
+      </simpleType>
+      <simpleType name="customDateType">
+        <restriction base="integer">
+          <pattern value="[1-2][0-9][0-9][0-9]"/>
+          <whiteSpace value="collapse"/>
+        </restriction>
+      </simpleType>
+      <simpleType name="customTimeType">
+        <restriction base="integer">
+          <pattern value="[0-2][0-9]:[0-9][0-9]"/>
+          <whiteSpace value="collapse"/>
+        </restriction>
+      </simpleType>
+    </schema>
+    <schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://openclinica.org/ws/event/v1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://openclinica.org/ws/beans" xmlns:events="http://openclinica.org/ws/event/v1">
+      <import namespace="http://openclinica.org/ws/beans"/>
+      <element name="scheduleRequest">
+        <complexType>
+          <sequence>
+            <element maxOccurs="unbounded" name="event" type="beans:eventType"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="scheduleResponse">
+        <complexType>
+          <sequence>
+            <element name="result" type="string"/>
+            <element name="eventDefinitionOID" type="string"/>
+            <element name="studySubjectOID" type="string"/>
+            <element name="studyEventOrdinal" type="string"/>
+            <element maxOccurs="unbounded" minOccurs="0" name="warning" type="string"/>
+            <element maxOccurs="unbounded" minOccurs="0" name="error" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="scheduleRequest">
+    <wsdl:part name="scheduleRequest" element="tns:scheduleRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="scheduleResponse">
+    <wsdl:part name="scheduleResponse" element="tns:scheduleResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ws">
+    <wsdl:operation name="schedule">
+      <wsdl:input name="scheduleRequest" message="tns:scheduleRequest">
+    </wsdl:input>
+      <wsdl:output name="scheduleResponse" message="tns:scheduleResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsSoap11" type="tns:ws">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="schedule">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="scheduleRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="scheduleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsService">
+    <wsdl:port name="wsSoap11" binding="tns:wsSoap11">
+      <soap:address location="http://WIN-C5TEAQ26TGA:8088/ws/eventWsdl"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

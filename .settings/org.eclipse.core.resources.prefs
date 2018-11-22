@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/org/openclinica/ws/beans/EventType.java=UTF-8
+encoding//src/org/openclinica/ws/beans/SiteRefType.java=UTF-8
+encoding//src/org/openclinica/ws/beans/StudyRefType.java=UTF-8
+encoding//src/org/openclinica/ws/beans/StudySubjectRefType.java=UTF-8
+encoding//src/org/openclinica/ws/event/v1/ScheduleResponse.java=UTF-8
+encoding//src/org/openclinica/ws/event/v1/Ws.java=UTF-8
+encoding//src/org/openclinica/ws/event/v1/WsService.java=UTF-8
+encoding//src/org/openclinica/ws/event/v1/WsServiceLocator.java=UTF-8
+encoding//src/org/openclinica/ws/event/v1/WsSoap11Stub.java=UTF-8
